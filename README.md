@@ -29,8 +29,12 @@ such as accounts, favorites, search, listening history, and responsive controls.
 
 <video src="static/images/demo.mp4" controls width="700"></video>
 
+<<<<<<< HEAD
 
 [![Watch the PocketBeats demo](static/images/picture.png)](images/pocketbeats-demo.mp4)
+=======
+[![Watch the PocketBeats demo](static/images/demo-picture.png)](images/pocketbeats-demo.mp4)
+>>>>>>> 1946b38 (Add PocketBeats MP4 demo)
 
 ## 🛠️ Tech Stack
 
