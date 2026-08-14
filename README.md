@@ -29,6 +29,9 @@ such as accounts, favorites, search, listening history, and responsive controls.
 
 <video src="static/images/demo.mp4" controls width="700"></video>
 
+
+[![Watch the PocketBeats demo](static/images/picture.png)](images/pocketbeats-demo.mp4)
+
 ## 🛠️ Tech Stack
 
 * Python & Django
