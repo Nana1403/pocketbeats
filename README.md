@@ -27,14 +27,8 @@ such as accounts, favorites, search, listening history, and responsive controls.
 
 ## Demo Walkthrough
 
-<video src="static/images/demo.mp4" controls width="700"></video>
+[![Watch the PocketBeats demo](static/images/demo-picture.png)](static/images/pocketbeats-demo.mp4)
 
-<<<<<<< HEAD
-
-[![Watch the PocketBeats demo](static/images/picture.png)](images/pocketbeats-demo.mp4)
-=======
-[![Watch the PocketBeats demo](static/images/demo-picture.png)](images/pocketbeats-demo.mp4)
->>>>>>> 1946b38 (Add PocketBeats MP4 demo)
 
 ## 🛠️ Tech Stack
 
