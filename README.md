@@ -27,7 +27,7 @@ such as accounts, favorites, search, listening history, and responsive controls.
 
 ## Demo Walkthrough
 
-<img src="static/images/demo.mp4" width=600>
+<video src="static/images/demo.mp4" controls width="700"></video>
 
 ## 🛠️ Tech Stack
 
