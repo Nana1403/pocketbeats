@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Favorites · PocketBeats{% endblock %}
+{% block content %}
+<h1 class="page-title">❤️ Favorites</h1>
+{% if favorites %}
+  {% for fav in favorites %}
+    <div class="song-row">
+      {% if fav.song.cover_art %}
+        <img class="song-cover" src="{{ fav.song.cover_art.url }}" alt="">
+      {% else %}
+        <div class="song-cover"></div>
+      {% endif %}
+      <div class="song-info">
+        <div class="st">{{ fav.song.title }}</div>
+        <div class="sa">{{ fav.song.artist|default:"Unknown artist" }} · saved {{ fav.date_saved|date:"M j" }}</div>
+      </div>
+      <a class="btn ghost" href="{% url 'music:song_detail' fav.song.pk %}">Open</a>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="empty">No favorites yet. Tap 🤍 in the player to save songs you love.</div>
+{% endif %}
+{% endblock %}

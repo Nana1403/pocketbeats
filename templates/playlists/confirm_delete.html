@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Delete {{ playlist.name }} · PocketBeats{% endblock %}
+{% block content %}
+<div class="card" style="max-width:480px;margin:0 auto;">
+  <h1 class="page-title">Delete this playlist?</h1>
+  <p>“{{ playlist.name }}” will be removed. Your songs stay in your library.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-actions">
+      <button type="submit" class="btn danger">Yes, delete</button>
+      <a class="btn ghost" href="{% url 'playlists:detail' playlist.pk %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

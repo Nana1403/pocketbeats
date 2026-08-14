@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PocketBeats · Player{% endblock %}
+
+{% block content %}
+<div class="player-stage">
+
+  <!-- ===== The MP3 player device ===== -->
+  <section class="device" id="player"
+           data-authenticated="{{ user.is_authenticated|yesno:'true,false' }}"
+           data-library-url="{% url 'music:library_json' %}"
+           data-favorites-url="{% url 'player:favorites_json' %}"
+           data-favorite-url="/player/api/favorite/"
+           data-play-url="/player/api/play/"
+           data-sample-url="{% static 'audio/sample.wav' %}"
+           data-sample-cover="{% static 'images/sample-cover.svg' %}">
+
+    <div class="device-top">
+      <span class="device-brand">PocketBeats</span>
+      <span class="device-dot"></span>
+    </div>
+
+    <!-- Screen -->
+    <div class="screen">
+      <div class="disc" id="disc">
+        <div class="disc-art" id="discArt"></div>
+        <div class="disc-hole"></div>
+      </div>
+      <div class="screen-info">
+        <div class="track-title" id="trackTitle">No track loaded</div>
+        <div class="track-artist" id="trackArtist">—</div>
+        <div class="track-meta" id="trackMeta"></div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-row">
+      <span class="time" id="timeCurrent">0:00</span>
+      <input type="range" id="seek" class="seek" min="0" max="1000" value="0" step="1"
+             aria-label="Seek">
+      <span class="time" id="timeTotal">0:00</span>
+    </div>
+
+    <!-- Control pad -->
+    <div class="controlpad">
+      <button class="pad-btn" id="prevBtn" title="Previous" aria-label="Previous">⏮</button>
+      <button class="pad-btn play" id="playBtn" title="Play/Pause" aria-label="Play or pause">▶</button>
+      <button class="pad-btn" id="nextBtn" title="Next" aria-label="Next">⏭</button>
+    </div>
+
+    <!-- Side controls -->
+    <div class="sidecontrols">
+      <button class="chip" id="shuffleBtn" title="Shuffle" aria-pressed="false">🔀 Shuffle</button>
+      <button class="chip" id="repeatBtn" title="Repeat" aria-pressed="false">🔁 Off</button>
+      <button class="chip" id="favBtn" title="Favorite" aria-pressed="false">🤍 Favorite</button>
+      <button class="chip" id="restartBtn" title="Restart">↺ Restart</button>
+    </div>
+
+    <div class="volume-row">
+      <button class="chip mute" id="muteBtn" title="Mute" aria-pressed="false">🔊</button>
+      <input type="range" id="volume" class="volume" min="0" max="1" step="0.01" value="0.8"
+             aria-label="Volume">
+    </div>
+
+    <button class="drawer-toggle" id="drawerToggle" aria-expanded="false">
+      📂 Library
+    </button>
+  </section>
+
+  <!-- ===== Library drawer ===== -->
+  <aside class="drawer" id="drawer">
+    <div class="drawer-head">
+      <div class="tabs">
+        <button class="tab active" data-source="library">Library</button>
+        <button class="tab" data-source="favorites">Favorites</button>
+      </div>
+      <input type="search" id="queueSearch" class="queue-search" placeholder="Search…">
+    </div>
+    <ol class="queue" id="queue">
+      <li class="queue-empty">Loading…</li>
+    </ol>
+  </aside>
+</div>
+
+{% if not user.is_authenticated %}
+  <p class="hint">
+    You're hearing a sample track. <a href="{% url 'accounts:signup' %}">Create an account</a>
+    or <a href="{% url 'accounts:login' %}">log in</a> to upload and play your own music.
+  </p>
+{% endif %}
+
+<audio id="audio" preload="metadata"></audio>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/player.js' %}"></script>
+{% endblock %}

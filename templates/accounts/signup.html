@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Sign up · PocketBeats{% endblock %}
+{% block content %}
+<div class="card" style="max-width:440px;margin:0 auto;">
+  <h1 class="page-title">Create your account</h1>
+  <form method="post" class="styled">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Sign up</button>
+      <a class="btn ghost" href="{% url 'accounts:login' %}">I have an account</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

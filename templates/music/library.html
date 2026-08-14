@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Library · PocketBeats{% endblock %}
+{% block content %}
+<h1 class="page-title">Your library</h1>
+
+<form method="get" class="searchbar styled">
+  <input type="search" name="q" value="{{ query }}"
+         placeholder="Search title, artist, album, or genre…">
+  <button type="submit" class="btn secondary">Search</button>
+  <a class="btn primary" href="{% url 'music:upload' %}">＋ Upload</a>
+</form>
+
+{% if songs %}
+  {% for song in songs %}
+    <div class="song-row">
+      {% if song.cover_art %}
+        <img class="song-cover" src="{{ song.cover_art.url }}" alt="">
+      {% else %}
+        <div class="song-cover"></div>
+      {% endif %}
+      <div class="song-info">
+        <div class="st">{{ song.title }}</div>
+        <div class="sa">{{ song.artist|default:"Unknown artist" }}
+          {% if song.album %}· {{ song.album }}{% endif %}
+          · {{ song.duration_display }}</div>
+      </div>
+      <div class="song-actions">
+        <a class="btn ghost" href="{% url 'music:song_detail' song.pk %}">Open</a>
+        <a class="btn secondary" href="{% url 'music:song_edit' song.pk %}">Edit</a>
+        <a class="btn danger" href="{% url 'music:song_delete' song.pk %}">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="empty">
+    {% if query %}
+      No songs match “{{ query }}”.
+    {% else %}
+      Your library is empty. <a href="{% url 'music:upload' %}">Upload your first track →</a>
+    {% endif %}
+  </div>
+{% endif %}
+{% endblock %}

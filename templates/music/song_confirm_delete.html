@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Delete {{ song.title }} · PocketBeats{% endblock %}
+{% block content %}
+<div class="card" style="max-width:480px;margin:0 auto;">
+  <h1 class="page-title">Delete this song?</h1>
+  <p>“{{ song.title }}” by {{ song.artist|default:"Unknown artist" }} will be permanently removed.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-actions">
+      <button type="submit" class="btn danger">Yes, delete</button>
+      <a class="btn ghost" href="{% url 'music:song_detail' song.pk %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

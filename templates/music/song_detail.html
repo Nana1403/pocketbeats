@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ song.title }} · PocketBeats{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="song-row" style="box-shadow:none;padding:0;">
+    {% if song.cover_art %}
+      <img class="song-cover" style="width:120px;height:120px" src="{{ song.cover_art.url }}" alt="">
+    {% else %}
+      <div class="song-cover" style="width:120px;height:120px"></div>
+    {% endif %}
+    <div class="song-info">
+      <h1 class="page-title" style="margin:0">{{ song.title }}</h1>
+      <p class="sa">{{ song.artist|default:"Unknown artist" }}</p>
+      <p class="helptext" style="color:var(--muted)">
+        {% if song.album %}Album: {{ song.album }}<br>{% endif %}
+        {% if song.genre %}Genre: {{ song.genre }}<br>{% endif %}
+        {% if song.release_year %}Year: {{ song.release_year }}<br>{% endif %}
+        Duration: {{ song.duration_display }}<br>
+        Uploaded: {{ song.date_uploaded|date:"M j, Y" }}
+      </p>
+    </div>
+  </div>
+
+  <audio controls src="{{ song.audio_file.url }}" style="width:100%;margin-top:1rem"></audio>
+
+  <div class="form-actions">
+    <a class="btn primary" href="{% url 'core:home' %}">Play in PocketBeats</a>
+    <a class="btn secondary" href="{% url 'music:song_edit' song.pk %}">Edit</a>
+    <a class="btn danger" href="{% url 'music:song_delete' song.pk %}">Delete</a>
+    <a class="btn ghost" href="{% url 'music:library' %}">Back to library</a>
+  </div>
+</div>
+{% endblock %}

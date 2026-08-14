@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Recently played · PocketBeats{% endblock %}
+{% block content %}
+<h1 class="page-title">🕘 Recently played</h1>
+{% if history %}
+  {% for entry in history %}
+    <div class="song-row">
+      {% if entry.song.cover_art %}
+        <img class="song-cover" src="{{ entry.song.cover_art.url }}" alt="">
+      {% else %}
+        <div class="song-cover"></div>
+      {% endif %}
+      <div class="song-info">
+        <div class="st">{{ entry.song.title }}</div>
+        <div class="sa">{{ entry.song.artist|default:"Unknown artist" }}
+          · played {{ entry.time_played|date:"M j, g:i a" }}
+          {% if entry.playback_position %}· stopped at {{ entry.playback_position }}s{% endif %}</div>
+      </div>
+      <a class="btn ghost" href="{% url 'music:song_detail' entry.song.pk %}">Open</a>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="empty">Nothing here yet. Play a song and it will show up.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{% if creating %}New playlist{% else %}Edit playlist{% endif %} · PocketBeats{% endblock %}
+{% block content %}
+<div class="card" style="max-width:520px;margin:0 auto;">
+  <h1 class="page-title">{% if creating %}New playlist{% else %}Edit “{{ playlist.name }}”{% endif %}</h1>
+  <form method="post" enctype="multipart/form-data" class="styled">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Save</button>
+      <a class="btn ghost" href="{% url 'playlists:list' %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
